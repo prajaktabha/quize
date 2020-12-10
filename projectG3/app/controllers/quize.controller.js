@@ -34,56 +34,101 @@ const Op = db.Sequelize.Op;
 //     });
 // };
 
-
 //insert
 
-
-exports.addQuize = (req,res)=>{
-  db.sequelize.query("insert into quizes(id,quizname,time,count,categoryid) values (?,?,?,?,(select id from categories where category=?))",
-  {replacements: [req.body.id,req.body.quizname,req.body.time,
-      req.body.count,req.body.category],type: db.sequelize.QueryTypes.INSERT }).then(data=>{
-      res.send(data);
-     console.log(data);
-    });
-}
-
-
-exports.getCategoryName = (req,res)=>{
-  db.sequelize.query("select * from categories",{type: db.sequelize.QueryTypes.SELECT }).then(data=>{
-      res.send(data);
-     console.log(data);
-    });
-}
-
-// Find a single Tutorial with an id
-exports.findOne = (req, res) => {
-    const id = req.params.id;
-
-    quizes.findByPk(id)
-      .then(data => {
+var allQuize;
+exports.addQuize = (req, res) => {
+  
+  
+    db.sequelize
+      .query(
+        "insert into quizes(id,quizname,time,count,categoryid) values (?,?,?,?,(select id from categories where category=?))",
+        {
+          replacements: [
+            req.body.id,
+            req.body.quizname,
+            req.body.time,
+            req.body.count,
+            req.body.category,
+          ],
+          type: db.sequelize.QueryTypes.INSERT,
+        }
+      )
+      .then((data) => {
         res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Error retrieving Tutorial with id=" + id
-        });
+        console.log(data);
       });
+  }
+
+
+exports.getCategoryName = (req, res) => {
+  db.sequelize
+    .query("select * from categories", { type: db.sequelize.QueryTypes.SELECT })
+    .then((data) => {
+      res.send(data);
+      console.log(data);
+    });
 };
 
 
+// exports.getbtquize = (req,res)=>{
+//   db.sequelize.query("select * from quizes where categoryid=?",
+//   {replacements: [req.params.categoryid],type: db.sequelize.QueryTypes.SELECT,}
+//   ).then(data=>{
+//       res.send(data);
+//      console.log(data);
+//     });
+// }
+
+exports.getQuize = (req,res) =>{ 
+  const id = req.params.id;
+  quizes.findAll({
+      where: { categoryid:id } 
+
+}).then(data => {
+  res.send(data);
+  console.log(data);
+    })
+.catch(err => {
+  res.status(500).send({
+    message:
+      err.message || "Some error occurred while retrieving tutorials."
+  });
+})};
+
+
+
+// Find a single Tutorial with an id
+exports.findOne = (req, res) => {
+  const id = req.params.id;
+
+  quizes
+    .findByPk(id)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving Tutorial with id=" + id,
+      });
+    });
+};
 
 exports.findAll = (req, res) => {
-    const quizname = req.query.quizname;
-    var condition = quizname ? { quizname: { [Op.like]: `%${quizname}%` } } : null;
-  
-    quizes.findAll({ where: condition })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving tutorials."
-        });
+  const quizname = req.query.quizname;
+  var condition = quizname
+    ? { quizname: { [Op.like]: `%${quizname}%` } }
+    : null;
+
+  quizes
+    .findAll({ where: condition })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials.",
       });
-  };
+    });
+};

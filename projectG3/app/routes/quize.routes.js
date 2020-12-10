@@ -10,7 +10,9 @@ module.exports = (app) => {
   //Retrieve all Tutorials
   router.get("/", quizes.findAll);
 
-  router.get("/:id", quizes.findOne);
+  // router.get("/:id", quizes.findOne);
+  // router.get("/getbtquize/:categoryid", quizes.getbtquize);
 
+  router.get("/:id", quizes.getQuize);
   app.use("/api/quizes", router);
 };

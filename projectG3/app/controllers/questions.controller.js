@@ -39,18 +39,45 @@ const Op = db.Sequelize.Op;
 // };
 
 
-
-
-
-
-
 //insert
-exports.insert=(req,res)=>{
-  db.sequelize.query("insert into questions values (default,?,?,?,?,?,?,(select id from quizes where quizname=?),(select id from types where type=?))",
-  {replacements: [req.body.id,req.body.questions,req.body.option1,req.body.option2,req.body.option3,req.body.option4,req.body.answer,req.body.quizname,req.body.type],type: db.sequelize.QueryTypes.INSERT}).then(data=>{
-    res.send(data);
-  });
+exports.addQuestion = (req,res)=>{
+  db.sequelize.query("insert into questions(id,questions,option1,option2,option3,option4,answer,quizId,typeId) values (?,?,?,?,?,?,?,(select id from quizes where quizname=?),(select id from types where type=?))",
+  {replacements: [req.body.id,req.body.questions,req.body.option1,
+      req.body.option2,req.body.option3,req.body.option4,
+      req.body.answer,req.body.quizname,req.body.type],type: db.sequelize.QueryTypes.INSERT }).then(data=>{
+      res.send(data);
+     console.log(data);
+    });
 }
+
+
+exports.getQuizName = (req,res)=>{
+  db.sequelize.query("select * from quizes",{type: db.sequelize.QueryTypes.SELECT }).then(data=>{
+      res.send(data);
+     console.log(data);
+    });
+}
+
+
+// exports.getCategoryName = (req,res)=>{
+//   db.sequelize.query("select * from categories",{type: db.sequelize.QueryTypes.SELECT }).then(data=>{
+//       res.send(data);
+//      console.log(data);
+//     });
+// }
+
+exports.getTypeName = (req,res)=>{
+  db.sequelize.query("select * from types",{type: db.sequelize.QueryTypes.SELECT }).then(data=>{
+      res.send(data);
+     console.log(data);
+    });
+}
+
+
+
+
+
+
 
 
 exports.findAll = (req, res) => {

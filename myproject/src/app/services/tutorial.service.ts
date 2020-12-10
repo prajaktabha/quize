@@ -3,20 +3,18 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Tutorial } from "../models/tutorial.model";
 
-// const baseUrl = "http://localhost:8080/api/quizes";
-
-
+const baseUrl = "http://localhost:8080/api/quizes";
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ "Content-Type": "application/json" }),
 };
 
 @Injectable({
   providedIn: "root",
 })
 export class TutorialService {
+  private baseUrl1 = "http://localhost:8080/api/quizes/addQuize";
 
-  private baseUrl1="http://localhost:8080/api/quizes/addQuize"
   constructor(private http: HttpClient) {}
 
   // getAll(): Observable<Tutorial[]> {
@@ -27,25 +25,21 @@ export class TutorialService {
   //   return this.http.get(`${baseUrl}/${id}`);
   // }
 
-  
-  addQuize (question: Tutorial): Observable<Tutorial> {
-    console.log(question, "This is a question")
+  addQuize(question: Tutorial): Observable<Tutorial> {
+    console.log(question, "This is a question");
 
-   return this.http.post<Tutorial>(this.baseUrl1, question, httpOptions);
+    return this.http.post<Tutorial>(this.baseUrl1, question, httpOptions);
+  }
 
- }
+  getCategoryName() {
+    return this.http.get("http://localhost:8080/api/quizes/getCategoryName");
+  }
 
- 
- getCategoryName(){
-  return this.http.get('http://localhost:8080/api/quizes/getCategoryName')
-}
-
-  // create(data: any): Observable<any> {
-  //   return this.http.post(baseUrl, data);
+  // getbtquize(categoryid: any){
+  //   return this.http.get('http://localhost:8080/api/quizes/${categoryid}')
   // }
 
-  // getcatid(catg: any) {
-  //   console.log(catg);
-  //   return this.http.get(`${baseUrl}/${catg}`);
-  // }
+  getQuize(categoryid: any): Observable<Tutorial> {
+    return this.http.get(`${baseUrl}/${categoryid}`);
+  }
 }

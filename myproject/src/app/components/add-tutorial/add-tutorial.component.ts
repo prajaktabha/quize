@@ -51,7 +51,7 @@ export class AddTutorialComponent implements OnInit {
     console.log(this.quiz, "This is from form")
     this.tutorialService.addQuize(this.quiz).subscribe(data=>{
       console.log(data);
-      alert(data);
+      // alert(data);
     })
   }
 

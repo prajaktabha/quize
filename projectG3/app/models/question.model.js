@@ -19,21 +19,22 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       },
     
-        quizid :{
-            type:Sequelize.INTEGER,
-            allowNull:false,
-            references:{
-                model: 'quizes',
-                key: 'id'
-            }
-        },
-        typeid :{
-            type:Sequelize.INTEGER,
-            allowNull:false,
-            references:{
-                model: 'types',
-                key: 'id'
-            }
+      quizid :{
+        type:Sequelize.INTEGER,
+        field: 'quizid',
+        references:{
+            model: 'quizes',
+            key: 'id'
+        }
+    },
+    
+    typeid :{
+        type:Sequelize.INTEGER,
+        field: 'typeid',
+        references:{
+            model: 'types',
+            key: 'id'
+        }
         } 
     },
     {

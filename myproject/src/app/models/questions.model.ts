@@ -1,11 +1,12 @@
-export class Questions {
-  id?: any;
-  questions?: string;
-  option1?: any;
-  option2?: any;
-  option3?: any;
-  option4?: any;
-  answer?: any;
-  quizid?: any;
-  typeid?: any;
+export class Question {
+  id: number;
+  question: string;
+  option1: string;
+  option2: string;
+  option3: string;
+  option4: string;
+  answer: string;
+  // category:string;
+  type:string;
+  quizname:string;
 }

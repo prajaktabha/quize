@@ -5,7 +5,11 @@ module.exports = app => {
   
     // Create a new Tutorial
     // router.post("/", questions.create);
-  router.post("/",questions.insert);
+    router.post('/addQuestion', questions.addQuestion);
+    // router.get("/getby", questions.getBy);
+    router.get("/getQuizName", questions.getQuizName);
+    // router.get("/getCategoryName", questions.getCategoryName);
+    router.get("/getTypeName", questions.getTypeName);
     //Retrieve all Tutorials
     router.get("/", questions.findAll);
 

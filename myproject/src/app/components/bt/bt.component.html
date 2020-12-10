@@ -1,26 +1,41 @@
-
-  <div>
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <!-- <a href="#" class="navbar-brand">bezKoder</a> -->
-      <div class="navbar-nav mr-auto">
-        <!-- <li class="nav-item">
-          <a routerLink="tutorials" class="nav-link">Tutorials</a>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a routerLink="add" class="nav-link">Add</a>
-        </li> -->
-        <li class="nav-item">
-            <a routerLink="../mcq" class="nav-link">BT MCQ</a>
-          </li>
-
-          <li class="nav-item">
-            <a routerLink="../descriptive" class="nav-link">BT Descriptive</a>
-          </li>
-     
+<!-- <div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">PRAJAKTA</h5>
+        <p class="card-text">IPHONE WALI PRAJAKTA</p>
+        <a href="#" class="btn btn-success">Attempt Quiz</a>
       </div>
-    </nav>
+    </div>
+  </div>
+</div>
+ -->
+
+
+<div>
+    <div *ngIf="currentTutorial.categoryid" class="edit-form">
+      <h4>Tutorial</h4>
+      <form>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            [(ngModel)]="currentTutorial.title"
+            name="title"
+          />
+        </div>
+    
   
-    <div class="container mt-3">
-      <router-outlet></router-outlet>
+       
+      </form>
+  
+     
+    </div>
+  
+    <div *ngIf="!currentTutorial.id">
+      <br />
+      <p>Cannot access this Tutorial...</p>
     </div>
   </div>

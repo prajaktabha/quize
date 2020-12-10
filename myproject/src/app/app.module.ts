@@ -8,11 +8,12 @@ import { AddTutorialComponent } from './components/add-tutorial/add-tutorial.com
 
 
 import { BtComponent } from './components/bt/bt.component';
-import { McqbtComponent } from './components/mcqbt/mcqbt.component';
-import { McqdesComponent } from './components/mcqdes/mcqdes.component';
+
+
 import { GkComponent } from './components/gk/gk.component';
 import { LtComponent } from './components/lt/lt.component';
 import { QuestionsComponent } from './components/questions/questions.component';
+import { CategoryComponent } from './components/category/category.component';
 
 @NgModule({
   declarations: [
@@ -22,14 +23,15 @@ import { QuestionsComponent } from './components/questions/questions.component';
     
     BtComponent,
  
-    McqbtComponent,
+
  
-    McqdesComponent,
+
  
     GkComponent,
  
     LtComponent,
-    QuestionsComponent
+    QuestionsComponent,
+    CategoryComponent
  
     
   ],
